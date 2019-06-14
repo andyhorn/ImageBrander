@@ -1,0 +1,107 @@
+﻿<Window x:Class="ImageBrander.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageBrander.UI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0 5 0 0">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Button Name="SelectPhotoButton" Content="Open" Padding="3" Margin="3"/>
+                <Button Name="SaveButton" Content="Save" Padding="3" Margin="3"/>
+            </StackPanel>
+        </DockPanel>
+
+        <Border BorderBrush="Black" BorderThickness="1" Name="ControlsBorder"
+                Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+        <Border BorderBrush="Black" BorderThickness="1" Name="MenuBarBorder"
+                Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+                Margin="0 5 0 0"/>
+        <Border BorderBrush="Black" BorderThickness="1" Name="ImageBorder"
+                Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Font" Grid.Row="0" Grid.Column="0" Margin="0 5"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" Margin="0 5"
+                          Name="FontComboBox"
+                          ItemsSource="{Binding FontList}" 
+                          DisplayMemberPath="Name" 
+                          SelectedValuePath="Name" 
+                          SelectedValue="{Binding Path=FontFamily}"
+                          SelectedItem="{Binding SelectedFont}"/>
+
+                <Label Content="Color" Grid.Row="1" Grid.Column="0" Margin="0 5"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 5"
+                          Name="ColorComboBox"
+                          ItemsSource="{Binding ColorList}" 
+                          DisplayMemberPath="Name" 
+                          SelectedValuePath="Name" 
+                          SelectedValue="{Binding Path=Color}"
+                          SelectedItem="{Binding SelectedColor}"/>
+            </Grid>
+
+            <Label Content="Watermark Text:" Margin="0 10 0 0"/>
+            <TextBox Name="WatermarkTextBox"/>
+        </StackPanel>
+
+        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="2"
+               Name="ImageDisplay" Margin="5"
+               Source="{Binding ImageBytes}"/>
+
+        
+            
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Content="Text Position:" Grid.Column="0" Grid.Row="0"/>
+                <UniformGrid
+                    Grid.Column="0" Grid.Row="1"
+                     Columns="3" Rows="3"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="5">
+                    <RadioButton GroupName="PositionGroup" Name="TopLeftRadio" Margin="15"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="TopMiddleRadio" Margin="15"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="TopRightRadio" Margin="15"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="MiddleLeftRadio" Margin="15"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="MiddleRadio" Margin="15"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="MiddleRightRadio" Margin="15"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="BottomLeftRadio" Margin="15" IsChecked="True"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="BottomMiddleRadio" Margin="15"></RadioButton>
+                    <RadioButton GroupName="PositionGroup" Name="BottomRightRadio" Margin="15"></RadioButton>
+                </UniformGrid>
+            </Grid>
+        
+    </Grid>
+</Window>
