@@ -18,5 +18,6 @@ namespace ImageBrander.UI.ViewModels
         System.Drawing.FontFamily SelectedFont { get; set; }
         System.Drawing.Color SelectedColor { get; set; }
         string Text { get; set; }
+        int FontSize { get; set; }
     }
 }

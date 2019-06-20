@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Xceed.Wpf.Toolkit;
 
 namespace ImageBrander.UI
 {
@@ -15,6 +16,7 @@ namespace ImageBrander.UI
         private Button selectPhotoButton, savePhotoButton;
         private TextBox watermarkTextBox;
         private ComboBox colorComboBox, fontComboBox;
+        private IntegerUpDown fontSizePicker;
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace ImageBrander.UI
             watermarkTextBox = WatermarkTextBox;
             colorComboBox = ColorComboBox;
             fontComboBox = FontComboBox;
+            fontSizePicker = FontSizePicker;
 
             fontComboBox.SelectionChanged += new SelectionChangedEventHandler((sender, args) => FontChanged(sender, args));
             colorComboBox.SelectionChanged += new SelectionChangedEventHandler((sender, args) => ColorChanged(sender, args));
@@ -38,6 +41,8 @@ namespace ImageBrander.UI
             savePhotoButton.Click += new RoutedEventHandler((sender, args) => SavePhoto(sender, args));
 
             watermarkTextBox.TextChanged += new TextChangedEventHandler((sender, args) => UpdateText(sender, args));
+
+            fontSizePicker.ValueChanged += new RoutedPropertyChangedEventHandler<object>((sender, args) => UpdateFontSize(sender, args));
         }
 
         private void OpenPhoto(object sender, RoutedEventArgs e)
@@ -78,6 +83,11 @@ namespace ImageBrander.UI
         private void UpdateText(object sender, TextChangedEventArgs e)
         {
             viewModel.Text = watermarkTextBox.Text;
+        }
+
+        private void UpdateFontSize(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            viewModel.FontSize = FontSizePicker.Value?? 0;
         }
     }
 }

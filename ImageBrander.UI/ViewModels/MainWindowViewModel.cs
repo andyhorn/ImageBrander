@@ -38,6 +38,7 @@ namespace ImageBrander.UI.ViewModels
 
             SelectedColor = System.Drawing.Color.Black;
             SelectedFont = new System.Drawing.FontFamily("Segoe UI");
+            FontSize = 14;
         }
 
         public void SaveImage(string watermarkText)
