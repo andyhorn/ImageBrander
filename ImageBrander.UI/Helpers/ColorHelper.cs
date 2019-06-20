@@ -22,5 +22,32 @@ namespace ImageBrander.UI.Helpers
 
             return colorList;
         }
+
+        public static System.Windows.Media.Color GetMediaColor(System.Drawing.Color drawingColor)
+        {
+            var a = drawingColor.A;
+            var r = drawingColor.R;
+            var g = drawingColor.G;
+            var b = drawingColor.B;
+
+            var color = new System.Windows.Media.Color
+            {
+                A = a,
+                R = r,
+                G = g,
+                B = b
+            };
+
+            return color;
+        }
+
+        public static System.Windows.Media.Brush GetMediaBrush(System.Drawing.Color drawingColor)
+        {
+            var color = GetMediaColor(drawingColor);
+
+            var mediaBrush = new System.Windows.Media.SolidColorBrush(color);
+
+            return mediaBrush;
+        }
     }
 }

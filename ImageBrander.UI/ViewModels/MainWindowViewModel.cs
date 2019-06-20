@@ -11,13 +11,17 @@ namespace ImageBrander.UI.ViewModels
         private IImageEngine engine;
         private IImage image;
         private string text;
+        private System.Drawing.FontFamily font;
+        private System.Drawing.Color color;
 
         public IImage Image { get => image; set => image = value; }
         public byte[] ImageBytes => Image.Bytes;
         public IList<System.Drawing.FontFamily> FontList { get; set; }
         public IList<System.Drawing.Color> ColorList { get; set; }
-        public System.Drawing.FontFamily SelectedFont { get; set; }
-        public System.Drawing.Color SelectedColor { get; set; }
+        public System.Drawing.FontFamily SelectedFont { get => font; set => UpdateFont(value); }
+        public System.Windows.Media.FontFamily DisplayFont { get => FontHelper.GetMediaFont(font); }
+        public System.Drawing.Color SelectedColor { get => color; set => UpdateColor(value); }
+        public System.Windows.Media.Brush DisplayColor { get => ColorHelper.GetMediaBrush(color); }
         public string Text { get => text; set => UpdateText(value); }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,6 +65,20 @@ namespace ImageBrander.UI.ViewModels
         {
             text = str;
             OnPropertyChanged("Text");
+        }
+
+        private void UpdateFont(System.Drawing.FontFamily fam)
+        {
+            font = fam;
+            OnPropertyChanged("SelectedFont");
+            OnPropertyChanged("DisplayFont");
+        }
+
+        private void UpdateColor(System.Drawing.Color col)
+        {
+            color = col;
+            OnPropertyChanged("SelectedColor");
+            OnPropertyChanged("DisplayColor");
         }
 
         private void OnPropertyChanged(string propertyName)

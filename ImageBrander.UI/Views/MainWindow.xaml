@@ -75,7 +75,9 @@
         <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="2"
                Name="WatermarkDisplay"
                Panel.ZIndex="1000"
-               FontSize="18"
+               FontSize="14"
+               FontFamily="{Binding DisplayFont}"
+               Foreground="{Binding DisplayColor}"
                Content="{Binding Text}" />
 
 
