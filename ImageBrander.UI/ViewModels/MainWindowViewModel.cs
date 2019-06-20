@@ -1,5 +1,6 @@
 ﻿using ImageBrander.Engine;
 using ImageBrander.Engine.Models;
+using ImageBrander.UI.Factories;
 using ImageBrander.UI.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace ImageBrander.UI.ViewModels
         private string text;
         private System.Drawing.FontFamily font;
         private System.Drawing.Color color;
+        private int fontSize;
 
         public IImage Image { get => image; set => image = value; }
         public byte[] ImageBytes => Image.Bytes;
@@ -23,6 +25,7 @@ namespace ImageBrander.UI.ViewModels
         public System.Drawing.Color SelectedColor { get => color; set => UpdateColor(value); }
         public System.Windows.Media.Brush DisplayColor { get => ColorHelper.GetMediaBrush(color); }
         public string Text { get => text; set => UpdateText(value); }
+        public int FontSize { get => fontSize; set => UpdateFontSize(value); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -40,16 +43,18 @@ namespace ImageBrander.UI.ViewModels
         public void SaveImage(string watermarkText)
         {
 
-            var watermark = new Watermark
-            {
-                FillColor = new ImageMagick.MagickColor("Black"),
-                Font = new ImageMagick.DrawableFont("Calibri"),
-                FontSize = 36,
-                StrokeColor = new ImageMagick.MagickColor("Black"),
-                X = image.Width / 2,
-                Y = image.Height / 2,
-                Text = watermarkText
-            };
+            //var watermark = new Watermark
+            //{
+            //    FillColor = new ImageMagick.MagickColor("Black"),
+            //    Font = new ImageMagick.DrawableFont("Calibri"),
+            //    FontSize = 36,
+            //    StrokeColor = new ImageMagick.MagickColor("Black"),
+            //    X = image.Width / 2,
+            //    Y = image.Height / 2,
+            //    Text = watermarkText
+            //};
+
+            var watermark = WatermarkFactory.Make(watermarkText, color, font, fontSize, System.Drawing.Color.Black, 0, 0);
 
             engine.Watermark(ref image, watermark);
             engine.SaveImage(ref image, @"C:/Users/Andy/Desktop/output");
@@ -79,6 +84,12 @@ namespace ImageBrander.UI.ViewModels
             color = col;
             OnPropertyChanged("SelectedColor");
             OnPropertyChanged("DisplayColor");
+        }
+
+        private void UpdateFontSize(int size)
+        {
+            fontSize = size;
+            OnPropertyChanged("FontSize");
         }
 
         private void OnPropertyChanged(string propertyName)
