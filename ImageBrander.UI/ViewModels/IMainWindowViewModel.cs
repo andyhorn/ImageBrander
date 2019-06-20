@@ -17,5 +17,6 @@ namespace ImageBrander.UI.ViewModels
         IList<System.Drawing.Color> ColorList { get; set; }
         System.Drawing.FontFamily SelectedFont { get; set; }
         System.Drawing.Color SelectedColor { get; set; }
+        string Text { get; set; }
     }
 }

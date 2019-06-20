@@ -12,8 +12,7 @@ namespace ImageBrander.UI
     public partial class MainWindow : Window
     {
         private IMainWindowViewModel viewModel;
-        private Button selectPhotoButton;
-        private Button savePhotoButton;
+        private Button selectPhotoButton, savePhotoButton;
         private TextBox watermarkTextBox;
         private ComboBox colorComboBox, fontComboBox;
         public MainWindow()
@@ -32,13 +31,13 @@ namespace ImageBrander.UI
             colorComboBox = ColorComboBox;
             fontComboBox = FontComboBox;
 
-            //fontComboBox.SelectedItem = viewModel.FontList.Where(f => f.Name == "Arial");
-
             fontComboBox.SelectionChanged += new SelectionChangedEventHandler((sender, args) => FontChanged(sender, args));
             colorComboBox.SelectionChanged += new SelectionChangedEventHandler((sender, args) => ColorChanged(sender, args));
 
             selectPhotoButton.Click += new RoutedEventHandler((sender, args) => OpenPhoto(sender, args));
             savePhotoButton.Click += new RoutedEventHandler((sender, args) => SavePhoto(sender, args));
+
+            watermarkTextBox.TextChanged += new TextChangedEventHandler((sender, args) => UpdateText(sender, args));
         }
 
         private void OpenPhoto(object sender, RoutedEventArgs e)
@@ -53,12 +52,17 @@ namespace ImageBrander.UI
 
         private void SavePhoto(object sender, RoutedEventArgs e)
         {
-            if(viewModel.Image.Bytes == null || string.IsNullOrWhiteSpace(watermarkTextBox.Text))
+            if(viewModel.Image.Bytes != null)
             {
-                return;
-            }
+                string brand = string.Empty;
 
-            viewModel.SaveImage(watermarkTextBox.Text);
+                if (!string.IsNullOrWhiteSpace(watermarkTextBox.Text))
+                {
+                    brand = watermarkTextBox.Text;
+                }
+
+                viewModel.SaveImage(brand);
+            }
         }
 
         private void FontChanged(object sender, RoutedEventArgs e)
@@ -69,6 +73,11 @@ namespace ImageBrander.UI
         private void ColorChanged(object sender, RoutedEventArgs e)
         {
             viewModel.SelectedColor = (System.Drawing.Color)colorComboBox.SelectedItem;
+        }
+
+        private void UpdateText(object sender, TextChangedEventArgs e)
+        {
+            viewModel.Text = watermarkTextBox.Text;
         }
     }
 }

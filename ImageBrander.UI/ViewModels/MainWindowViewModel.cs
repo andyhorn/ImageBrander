@@ -10,6 +10,7 @@ namespace ImageBrander.UI.ViewModels
     {
         private IImageEngine engine;
         private IImage image;
+        private string text;
 
         public IImage Image { get => image; set => image = value; }
         public byte[] ImageBytes => Image.Bytes;
@@ -17,6 +18,7 @@ namespace ImageBrander.UI.ViewModels
         public IList<System.Drawing.Color> ColorList { get; set; }
         public System.Drawing.FontFamily SelectedFont { get; set; }
         public System.Drawing.Color SelectedColor { get; set; }
+        public string Text { get => text; set => UpdateText(value); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -53,6 +55,12 @@ namespace ImageBrander.UI.ViewModels
         {
             image = await engine.OpenAsync(fileName);
             OnPropertyChanged("ImageBytes");
+        }
+
+        private void UpdateText(string str)
+        {
+            text = str;
+            OnPropertyChanged("Text");
         }
 
         private void OnPropertyChanged(string propertyName)
