@@ -82,7 +82,9 @@
     </Compile>
     <Compile Include="Factories\WatermarkFactory.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\FontHelper.cs" />
+    <Compile Include="Models\Position.cs" />
     <Compile Include="ViewModels\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -117,9 +119,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ImageBrander.Engine\ImageBrander.Engine.csproj">
       <Project>{057f557f-f8b1-494b-bbf8-65738be74ff1}</Project>

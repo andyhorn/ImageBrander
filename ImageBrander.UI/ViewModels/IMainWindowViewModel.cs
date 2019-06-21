@@ -19,5 +19,12 @@ namespace ImageBrander.UI.ViewModels
         System.Drawing.Color SelectedColor { get; set; }
         string Text { get; set; }
         int FontSize { get; set; }
+        string TextPosition { get; set; }
+        double WatermarkWidth { get; set; }
+        double WatermarkHeight { get; set; }
+        double X { get; }
+        double Y { get; }
+        double DisplayWidth { get; set; }
+        double DisplayHeight { get; set; }
     }
 }
