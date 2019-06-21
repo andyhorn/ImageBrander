@@ -52,18 +52,6 @@ namespace ImageBrander.UI.ViewModels
 
         public void SaveImage(string watermarkText)
         {
-
-            //var watermark = new Watermark
-            //{
-            //    FillColor = new ImageMagick.MagickColor("Black"),
-            //    Font = new ImageMagick.DrawableFont("Calibri"),
-            //    FontSize = 36,
-            //    StrokeColor = new ImageMagick.MagickColor("Black"),
-            //    X = image.Width / 2,
-            //    Y = image.Height / 2,
-            //    Text = watermarkText
-            //};
-
             var watermark = WatermarkFactory.Make(watermarkText, color, font, fontSize, System.Drawing.Color.Black, 0, 0);
 
             engine.Watermark(ref image, watermark);
@@ -107,10 +95,7 @@ namespace ImageBrander.UI.ViewModels
             textPosition = pos;
 
             var position = Position.GetPoint(textPosition.Substring(0, textPosition.IndexOf("Radio")));
-
-            //x = GetXPosition(position);
-            //y = GetYPosition(position);
-
+            
             UpdateCoordinates(position);
         }
 
@@ -122,57 +107,43 @@ namespace ImageBrander.UI.ViewModels
 
         private void SetXPosition(Position.Point location)
         {
-            //double xPos;
             switch(location)
             {
                 case Position.Point.TopMiddle:
                 case Position.Point.Middle:
                 case Position.Point.BottomMiddle:
-                    //xPos = (Image.Width / 2) - (WatermarkWidth / 2);
-                    //x = (DisplayWidth / 2) - (WatermarkWidth / 2);
                     x = (DisplayWidth / 2) - (WatermarkWidth / 2);
                     break;
                 case Position.Point.TopRight:
                 case Position.Point.MiddleRight:
                 case Position.Point.BottomRight:
-                    //xPos = Image.Width - WatermarkWidth;
-                    //x = DisplayWidth - WatermarkWidth;
                     x = DisplayWidth - WatermarkWidth;
                     break;
                 default:
-                    //xPos = 0;
                     x = 0;
                     break;
             }
-            //return xPos;
         }
 
         private void SetYPosition(Position.Point location)
         {
-            //double yPos;
             // label is positioned relative to the top-left corner
             switch(location)
             {
                 case Position.Point.BottomLeft:
                 case Position.Point.BottomMiddle:
                 case Position.Point.BottomRight:
-                    //yPos = Image.Height;
                     y = DisplayHeight - WatermarkHeight;
                     break;
                 case Position.Point.Middle:
                 case Position.Point.MiddleLeft:
                 case Position.Point.MiddleRight:
-                    //yPos = (Image.Height / 2) + (WatermarkHeight / 2);
-                    //y = (DisplayHeight / 2) + (WatermarkHeight / 2);
                     y = (DisplayHeight / 2) - (WatermarkHeight / 2);
                     break;
                 default:
-                    //yPos = WatermarkHeight;
-                    //y = WatermarkHeight;
                     y = 0;
                     break;
             }
-            //return yPos;
         }
 
         private void OnPropertyChanged(string propertyName)

@@ -22,7 +22,6 @@ namespace ImageBrander.UI
         private TextBox watermarkTextBox;
         private ComboBox colorComboBox, fontComboBox;
         private IntegerUpDown fontSizePicker;
-        //private RadioButton topLeft, topMiddle, topRight, middleLeft, middle, middleRight, bottomLeft, bottomMiddle, bottomRight;
         private Collection<RadioButton> textPositionSelectors;
         public MainWindow()
         {
@@ -41,18 +40,6 @@ namespace ImageBrander.UI
             colorComboBox = ColorComboBox;
             fontComboBox = FontComboBox;
             fontSizePicker = FontSizePicker;
-
-            //topLeft = TopLeftRadio;
-            //topMiddle = TopMiddleRadio;
-            //topRight = TopRightRadio;
-            //middleLeft = MiddleLeftRadio;
-            //middle = MiddleRadio;
-            //middleRight = MiddleRightRadio;
-            //bottomLeft = BottomLeftRadio;
-            //bottomMiddle = BottomMiddleRadio;
-            //bottomRight = BottomRightRadio;
-
-            //textPositionSelectors.Ad
 
             textPositionSelectors.Add(TopLeftRadio);
             textPositionSelectors.Add(TopMiddleRadio);
